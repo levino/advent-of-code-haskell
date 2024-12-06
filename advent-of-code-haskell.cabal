@@ -38,6 +38,8 @@ library
   build-depends:
       HUnit
     , base >=4.7 && <5
+    , raw-strings-qq
+    , split
     , tasty
     , tasty-hunit
   default-language: Haskell2010
@@ -55,6 +57,8 @@ executable advent-of-code-haskell-exe
       HUnit
     , advent-of-code-haskell
     , base >=4.7 && <5
+    , raw-strings-qq
+    , split
     , tasty
     , tasty-hunit
   default-language: Haskell2010
@@ -73,6 +77,8 @@ test-suite advent-of-code-haskell-test
       HUnit
     , advent-of-code-haskell
     , base >=4.7 && <5
+    , raw-strings-qq
+    , split
     , tasty
     , tasty-hunit
   default-language: Haskell2010

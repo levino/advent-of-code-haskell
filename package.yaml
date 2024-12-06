@@ -24,6 +24,9 @@ dependencies:
 - HUnit
 - tasty
 - tasty-hunit
+- split
+- raw-strings-qq
+
 ghc-options:
 - -Wall
 - -Wcompat
