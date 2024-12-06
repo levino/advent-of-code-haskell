@@ -1,0 +1,22 @@
+{
+	"name": "Debian",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers-extra/features/haskell:2": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"haskell.haskell"
+			],
+			"settings": {
+				"editor.defaultFormatter": "haskell.haskell",
+				"[jsonc]": {
+					"editor.defaultFormatter": "vscode.json-language-features"
+				}
+			}
+		}
+	}
+}

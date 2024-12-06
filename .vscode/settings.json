@@ -2,5 +2,8 @@
     "editor.defaultFormatter": "justusadam.language-haskell",
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[haskell]": {
+        "editor.defaultFormatter": "haskell.haskell"
     }
 }
