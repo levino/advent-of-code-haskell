@@ -26,6 +26,7 @@ dependencies:
 - tasty-hunit
 - split
 - raw-strings-qq
+- flow
 
 ghc-options:
 - -Wall
