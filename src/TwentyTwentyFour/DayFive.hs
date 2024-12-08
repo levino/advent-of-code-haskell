@@ -1,6 +1,5 @@
 module TwentyTwentyFour.DayFive (sumValidMiddleValues) where
 
-import Data.List (find)
 import Data.List.Split
 import Flow
 
@@ -11,7 +10,27 @@ parseRules :: String -> [[Int]]
 parseRules = lines .> map (splitOn "|" .> map parseInt)
 
 parseUpdates :: String -> [[Int]]
-parseUpdates = lines .> map (splitOn " " .> map parseInt)
+parseUpdates =
+  lines
+    .> map
+      ( splitOn ","
+          .> map
+            parseInt
+      )
+
+slice :: Int -> Int -> [a] -> [a]
+slice start end xs = take (end - start) (drop start xs)
+
+anyIn :: [Int] -> [Int] -> Bool
+anyIn values list =
+  foldl
+    ( \acc value ->
+        if acc
+          then acc
+          else value `elem` list
+    )
+    False
+    values
 
 sumValidMiddleValues :: String -> String -> Int
 sumValidMiddleValues rulesString updatesString =
@@ -19,20 +38,26 @@ sumValidMiddleValues rulesString updatesString =
       updates = parseUpdates updatesString
    in updates
         |> filter
-          ( foldl
-                ( \oldValue currentNumber ->
-                    let numbersAfter = rules |> filter (\rule -> rule !! 0 == currentNumber) |> map (!! 0)
-                        numbersBefore = rules |> filter (\rule -> rule !! 1 == currentNumber) |> map (!! 1)
-                     in True
-                )
-                0
+          ( \update ->
+              zip [0 ..] update
+                |> foldl
+                  ( \oldValue (index, currentNumber) ->
+                      if not oldValue
+                        then oldValue
+                        else
+                          let forbiddenNumbersBefore = rules |> filter (\rule -> head rule == currentNumber) |> map (!! 1)
+                              forbiddenNumbersAfter = rules |> filter (\rule -> rule !! 1 == currentNumber) |> map (!! 0)
+                              numbersBefore = slice 0 index update
+                              numbersAfter = slice index (length update - 1) update
+                           in not (anyIn forbiddenNumbersBefore numbersBefore || anyIn forbiddenNumbersAfter numbersAfter)
+                  )
+                  True
           )
         |> foldl
-          ( ( \sum
-               update ->
-                  sum
-                    + update
-                      !! (length update + 1 / 2)
-            )
-              0
+          ( \currentSum
+             update ->
+                currentSum
+                  + update
+                    !! ((length update - 1) `div` 2)
           )
+          0

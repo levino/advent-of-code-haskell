@@ -10,12 +10,13 @@ import TwentyTwentyFour.DayFive (sumValidMiddleValues)
 tests05 :: TestTree
 tests05 =
   testGroup
-    "Tests for 04"
+    "Tests for 05"
     [ testCase "sumValidMiddleValues" $ sumValidMiddleValues rules updates @?= 1737
     ]
 
 rules :: String
-rules = [r||53|62
+rules =
+  [r|53|62
 43|48
 43|99
 62|76
@@ -1190,10 +1191,11 @@ rules = [r||53|62
 59|46
 66|69
 66|87
-14|58||]
+14|58|]
 
 updates :: String
-updates = [r|71,31,35,38,58,83,43,67,11,45,32
+updates =
+  [r|71,31,35,38,58,83,43,67,11,45,32
 32,99,27,62,48,64,46,98,14
 53,55,27,11,45,93,32,48,98,51,86
 97,76,73,34,69,47,16,49,87,92,71,39,31,35,17,38,53,57,83
