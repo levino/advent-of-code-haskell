@@ -5,13 +5,14 @@ module TwentyTwentyFour.TestDayFive (tests05) where
 import Test.Tasty
 import Test.Tasty.HUnit
 import Text.RawString.QQ
-import TwentyTwentyFour.DayFive (sumValidMiddleValues)
+import TwentyTwentyFour.DayFive (fixAndSumFixedMiddleValues, sumValidMiddleValues)
 
 tests05 :: TestTree
 tests05 =
   testGroup
     "Tests for 05"
-    [ testCase "sumValidMiddleValues" $ sumValidMiddleValues rules updates @?= 1737
+    [ testCase "sumValidMiddleValues" $ sumValidMiddleValues rules updates @?= 7307,
+      testCase "fixAndSumFixedMiddleValues" $ fixAndSumFixedMiddleValues rules updates @?= 1
     ]
 
 rules :: String

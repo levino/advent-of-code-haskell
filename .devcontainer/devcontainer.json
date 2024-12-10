@@ -12,6 +12,7 @@
 				"haskell.haskell"
 			],
 			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh",
 				"editor.defaultFormatter": "haskell.haskell",
 				"[jsonc]": {
 					"editor.defaultFormatter": "vscode.json-language-features"
