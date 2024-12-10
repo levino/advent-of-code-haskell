@@ -1,10 +1,10 @@
 import Test.Tasty
-import TwentyTwentyFour.Test04 (tests04)
-import TwentyTwentyFour.TestDayFive (tests05)
+
+import TwentyTwentyFour.TestDaySix (tests06)
 
 main :: IO ()
 main =
   defaultMain $
     testGroup
       "All Tests"
-      [tests04, tests05]
+      [tests06]

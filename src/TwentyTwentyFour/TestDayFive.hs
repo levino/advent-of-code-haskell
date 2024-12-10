@@ -12,7 +12,7 @@ tests05 =
   testGroup
     "Tests for 05"
     [ testCase "sumValidMiddleValues" $ sumValidMiddleValues rules updates @?= 7307,
-      testCase "fixAndSumFixedMiddleValues" $ fixAndSumFixedMiddleValues rules updates @?= 1
+      testCase "fixAndSumFixedMiddleValues" $ fixAndSumFixedMiddleValues rules updates @?= 4713
     ]
 
 rules :: String

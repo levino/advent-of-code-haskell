@@ -28,8 +28,10 @@ library
       Lib
       TwentyTwentyFour.DayFive
       TwentyTwentyFour.DayFour
+      TwentyTwentyFour.DaySix
       TwentyTwentyFour.Test04
       TwentyTwentyFour.TestDayFive
+      TwentyTwentyFour.TestDaySix
   other-modules:
       Paths_advent_of_code_haskell
   autogen-modules:
