@@ -26,8 +26,10 @@ source-repository head
 library
   exposed-modules:
       Lib
+      TwentyTwentyFour.DayFive
       TwentyTwentyFour.DayFour
       TwentyTwentyFour.Test04
+      TwentyTwentyFour.TestDayFive
   other-modules:
       Paths_advent_of_code_haskell
   autogen-modules:
@@ -38,6 +40,7 @@ library
   build-depends:
       HUnit
     , base >=4.7 && <5
+    , flow
     , raw-strings-qq
     , split
     , tasty
@@ -57,6 +60,7 @@ executable advent-of-code-haskell-exe
       HUnit
     , advent-of-code-haskell
     , base >=4.7 && <5
+    , flow
     , raw-strings-qq
     , split
     , tasty
@@ -77,6 +81,7 @@ test-suite advent-of-code-haskell-test
       HUnit
     , advent-of-code-haskell
     , base >=4.7 && <5
+    , flow
     , raw-strings-qq
     , split
     , tasty
