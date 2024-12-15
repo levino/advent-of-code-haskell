@@ -27,6 +27,7 @@ dependencies:
 - split
 - raw-strings-qq
 - flow
+- lens
 
 ghc-options:
 - -Wall

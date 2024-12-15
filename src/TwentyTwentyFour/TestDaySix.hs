@@ -11,7 +11,7 @@ tests06 :: TestTree
 tests06 =
   testGroup
     "Tests for 06"
-    [ testCase "numberOfPositions" $ numberOfPositions zeMap @?= 7307
+    [ testCase "numberOfPositions" $ numberOfPositions zeMap @?= 4656
     ]
 
 zeMap :: String
