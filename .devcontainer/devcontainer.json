@@ -6,6 +6,7 @@
 	"features": {
 		"ghcr.io/devcontainers-extra/features/haskell:2": {}
 	},
+	"postCreateCommand": "stack build",
 	"customizations": {
 		"vscode": {
 			"extensions": [
