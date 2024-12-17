@@ -48,6 +48,7 @@ library
     , split
     , tasty
     , tasty-hunit
+    , vector
   default-language: Haskell2010
 
 executable advent-of-code-haskell-exe
@@ -69,6 +70,7 @@ executable advent-of-code-haskell-exe
     , split
     , tasty
     , tasty-hunit
+    , vector
   default-language: Haskell2010
 
 test-suite advent-of-code-haskell-test
@@ -91,4 +93,5 @@ test-suite advent-of-code-haskell-test
     , split
     , tasty
     , tasty-hunit
+    , vector
   default-language: Haskell2010

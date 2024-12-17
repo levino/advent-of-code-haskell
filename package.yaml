@@ -28,6 +28,7 @@ dependencies:
 - raw-strings-qq
 - flow
 - lens
+- vector
 
 ghc-options:
 - -Wall
