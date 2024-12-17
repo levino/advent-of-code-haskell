@@ -1,6 +1,6 @@
 {-# LANGUAGE LambdaCase #-}
 
-module TwentyTwentyFour.DaySix (numberOfPositions) where
+module TwentyTwentyFour.DaySix (numberOfPositions, numberOfObstructions) where
 
 import Control.Lens (Ixed (ix), element, (.~))
 import Data.List
@@ -87,19 +87,66 @@ applyStep maze =
               then Just (update2d x y 'X' (update2d (x + 1) y '>' maze))
               else Just (update2d x y 'v' maze)
 
-step :: ([String], Int) -> ([String], Int)
-step (maze, steps) =
+applyStepWithObstructions :: ([String], Char, Int) -> Maybe ([String], Char, Int)
+applyStepWithObstructions (maze, currentChar, numberOfObstacles) =
+  guardPosition maze >>= \(x, y) ->
+    guardDirection maze >>= \case
+      UP ->
+        if y == 0
+          then
+            Just (update2d x y 'X' maze, currentChar, numberOfObstacles)
+          else
+            let nextChar = get2d x (y - 1) maze
+             in if nextChar /= '#'
+                  then Just (update2d x y 'X' (update2d x (y - 1) '^' maze), nextChar, if currentChar == 'X' then numberOfObstacles + 1 else numberOfObstacles)
+                  else Just (update2d x y '>' maze, currentChar, numberOfObstacles)
+      DOWN ->
+        if y == length maze
+          then Just (update2d x y 'X' maze, currentChar, numberOfObstacles)
+          else
+            let nextChar = get2d x (y + 1) maze
+             in if nextChar /= '#'
+                  then Just (update2d x y 'X' (update2d x (y + 1) 'v' maze), nextChar, if currentChar == 'X' then numberOfObstacles + 1 else numberOfObstacles)
+                  else Just (update2d x y '<' maze, currentChar, numberOfObstacles)
+      LEFT ->
+        if x == 0
+          then Just (update2d x y 'X' maze, currentChar, numberOfObstacles)
+          else
+            let nextChar = get2d (x - 1) y maze
+             in if nextChar /= '#'
+                  then Just (update2d x y 'X' (update2d (x - 1) y '<' maze), nextChar, if currentChar == 'X' then numberOfObstacles + 1 else numberOfObstacles)
+                  else Just (update2d x y '^' maze, currentChar, numberOfObstacles)
+      RIGHT ->
+        if x == length (head maze)
+          then Just (update2d x y 'X' maze, currentChar, numberOfObstacles)
+          else
+            let nextChar = get2d (x + 1) y maze
+             in if nextChar /= '#'
+                  then Just (update2d x y 'X' (update2d (x + 1) y '>' maze), nextChar, if currentChar == 'X' then numberOfObstacles + 1 else numberOfObstacles)
+                  else Just (update2d x y 'v' maze, currentChar, numberOfObstacles)
+
+walk :: [String] -> [String]
+walk maze =
   if not (any (anyCharInString guardSymbols) maze)
-    then (maze, steps)
-    else case applyStep maze of
-      Just nextMaze -> step (nextMaze, steps + 1)
-      Nothing -> (maze, steps)
+    then maze
+    else maybe maze walk (applyStep maze)
+
+obstructions :: ([String], Char, Int) -> Int
+obstructions (maze, currentChar, currentNumberOfObstacles) =
+  if not (any (anyCharInString guardSymbols) maze)
+    then currentNumberOfObstacles
+    else maybe currentNumberOfObstacles obstructions (applyStepWithObstructions (maze, currentChar, currentNumberOfObstacles))
 
 numberOfPositions :: String -> Int
 numberOfPositions =
   lines
-    .> (\maze -> step (maze, 0))
-    .> fst
+    .> walk
     .> intercalate ""
     .> filter (== 'X')
     .> length
+
+numberOfObstructions :: String -> Int
+numberOfObstructions =
+  lines
+    .> ( \maze -> obstructions (maze, '.', -1)
+       )
